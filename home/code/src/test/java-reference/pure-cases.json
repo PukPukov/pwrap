@@ -1,0 +1,5605 @@
+[
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": []
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "audio": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "tg"
+        ],
+        "providers": {
+          "uris": "broker"
+        },
+        "environment": {}
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "test-app"
+        ],
+        "manifest": "/tmp/tmpcizqr3pk/app.json",
+        "environment": {},
+        "activationArguments": []
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.App",
+          "interface": "org.example.Interface",
+          "path": "/org/example/App",
+          "members": [
+            "Open"
+          ]
+        }
+      ]
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "dbusOwn": [
+          "org.example.Client"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.App",
+            "interface": "org.example.Interface",
+            "path": "/org/example/App",
+            "members": [
+              "Open"
+            ]
+          }
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.App",
+            "interface": "org.example.Interface",
+            "path": "/org/example/App",
+            "members": [
+              "Open"
+            ]
+          }
+        ],
+        "environment": {}
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {}
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {}
+        ],
+        "environment": {}
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "app",
+          "argument"
+        ],
+        "gpu": false,
+        "sharedTmp": false,
+        "manifest": "/tmp/tmplg04qfi3/profile.json",
+        "environment": {}
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "app"
+        ],
+        "gpu": true,
+        "sharedTmp": true,
+        "manifest": "/tmp/tmplg04qfi3/profile.json",
+        "environment": {}
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "sharedTmp": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "tasksMax": 37,
+        "gpu": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "gpu": false,
+        "desktop": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "tasksMax": 0
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "tasksMax": -1
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "network": "local"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "network": "local",
+        "allowLAN": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "test-app",
+          "argument"
+        ],
+        "persist": [
+          "~/state"
+        ],
+        "manifest": "/tmp/tmpl3njn8fj/app.json",
+        "immutableData": [
+          "/trusted/resource"
+        ],
+        "readOnly": [
+          "/input"
+        ],
+        "environment": {
+          "TEST": "value"
+        },
+        "network": "internet"
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app",
+          "argument"
+        ],
+        "audio": true,
+        "providers": {
+          "audio": "direct"
+        },
+        "manifest": "/tmp/tmpepidrdtm/app.json",
+        "environment": {}
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app",
+          "argument"
+        ],
+        "providers": {
+          "audio": "direct"
+        },
+        "environment": {},
+        "audio": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "test-app",
+          "argument"
+        ],
+        "memoryMax": "1G",
+        "manifest": "/tmp/tmp9e8nl9z9/app.json",
+        "environment": {}
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "webBrowser": "broker"
+        },
+        "environment": {}
+      }
+    },
+    "ok": false,
+    "policyChange": "Portal migration removes the custom web/URI provider schema; legacy configuration is rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "webBrowser": "broker"
+        },
+        "environment": {},
+        "openWeb": true
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "run",
+        "command": [
+          "app"
+        ],
+        "environment": {},
+        "openWeb": true
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Changed"
+          ]
+        }
+      ]
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Changed"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "dbus-arguments",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Changed"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": true,
+    "result": [
+      "--call=org.example.Service=org.example.Interface.Read@/org/example/Object",
+      "--call=org.example.Service=org.example.Interface.Write@/org/example/Object",
+      "--broadcast=org.example.Service=org.example.Interface.Changed@/org/example/Object"
+    ]
+  },
+  {
+    "operation": "dbus-arguments",
+    "arguments": {
+      "policy": {
+        "dbusTalk": [
+          "org.example.Peer.*"
+        ],
+        "dbusOwn": [
+          "org.example.Peer.App"
+        ]
+      }
+    },
+    "ok": true,
+    "result": [
+      "--talk=org.example.Peer.*",
+      "--own=org.example.Peer.App"
+    ]
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "network": "local",
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "network": "local",
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        null
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          null
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          null
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        true
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          true
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          true
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        "org.example.Service"
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          "org.example.Service"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          "org.example.Service"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {}
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {}
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ],
+          "typo": true
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ],
+            "typo": true
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ],
+            "typo": true
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.*",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.*",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.*",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": ":1.42",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": ":1.42",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": ":1.42",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.*",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.*",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.*",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "Read",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "Read",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "Read",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/*",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/*",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/*",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org//Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org//Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org//Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/Object@/anywhere",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/Object@/anywhere",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/Object@/anywhere",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": []
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": []
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": []
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": "*"
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": "*"
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": "*"
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "*"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "*"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Read@/else"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read@/else"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read@/else"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Read\n"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read\n"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read\n"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            42
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              42
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              42
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "path": "/org/example/Object",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "path": "/org/example/Object",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "members": [
+            "Read",
+            "Write"
+          ]
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "members": [
+              "Read",
+              "Write"
+            ]
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": [
+        {
+          "destination": "org.example.Service",
+          "interface": "org.example.Interface",
+          "path": "/org/example/Object"
+        }
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object"
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusBroadcasts": [
+          {
+            "destination": "org.example.Service",
+            "interface": "org.example.Interface",
+            "path": "/org/example/Object"
+          }
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": null
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": null
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": {}
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": {}
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": true
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "dbus-operations",
+    "arguments": {
+      "operations": "raw-rule"
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "dbusCalls": "raw-rule"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "desktop": true,
+        "gpu": false,
+        "environment": {
+          "HOME": "/tmp/tmpe4gtrrcr/payload/HOME",
+          "XDG_CONFIG_HOME": "/tmp/tmpe4gtrrcr/payload/XDG_CONFIG_HOME",
+          "XDG_DATA_HOME": "/tmp/tmpe4gtrrcr/payload/XDG_DATA_HOME",
+          "XDG_CONFIG_DIRS": "/tmp/tmpe4gtrrcr/payload/XDG_CONFIG_DIRS",
+          "XDG_DATA_DIRS": "/tmp/tmpe4gtrrcr/payload/XDG_DATA_DIRS",
+          "FONTCONFIG_FILE": "/tmp/tmpe4gtrrcr/payload/fonts.conf",
+          "FONTCONFIG_PATH": "/tmp/tmpe4gtrrcr/payload/FONTCONFIG_PATH",
+          "GTK_PATH": "/tmp/tmpe4gtrrcr/payload/GTK_PATH",
+          "QT_PLUGIN_PATH": "/tmp/tmpe4gtrrcr/payload/QT_PLUGIN_PATH",
+          "LD_PRELOAD": "/tmp/tmpe4gtrrcr/payload/LD_PRELOAD",
+          "LD_LIBRARY_PATH": "/tmp/tmpe4gtrrcr/payload/LD_LIBRARY_PATH",
+          "GIO_EXTRA_MODULES": "/tmp/tmpe4gtrrcr/payload/GIO_EXTRA_MODULES",
+          "GCONV_PATH": "/tmp/tmpe4gtrrcr/payload/GCONV_PATH",
+          "PYTHONPATH": "/tmp/tmpe4gtrrcr/payload/PYTHONPATH"
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "none"
+      },
+      "dns_addresses": [],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "counter reject"
+    ]
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [
+        "example.test"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [
+        "::1%eth0"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [
+        "127.0.0.1;"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [
+        1
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [],
+      "denied_ports": [
+        0
+      ],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [],
+      "denied_ports": [
+        65536
+      ],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [],
+      "denied_ports": [
+        "53"
+      ],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [],
+      "denied_ports": [
+        true
+      ],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "chain": [
+          "",
+          []
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "chain": [
+          "/",
+          []
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "chain": [
+          "/system.slice/probe.service",
+          []
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "chain": [
+          "system.slice/../probe",
+          []
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "chain": [
+          "system.slice//probe.service",
+          []
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "chain": [
+          "system.slice/probe.service/",
+          []
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "chain": [
+          "system.slice/\"probe",
+          []
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture-name",
+      "entries": {},
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture;delete",
+      "entries": {},
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "",
+      "entries": {},
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": false
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "deny": [
+          "system.slice/system-fixture.slice",
+          [
+            "counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet fixture { comment \"pwrap egress\"; }\nadd chain inet fixture output { type filter hook output priority -174; policy accept; }\nadd chain inet fixture deny\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-fixture.slice\" jump deny\nadd rule inet fixture deny counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [
+        "127.0.0.53",
+        "2001:db8::53"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "ip6 daddr 2001:db8::53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet"
+      },
+      "dns_addresses": [
+        "127.0.0.53",
+        "2001:db8::53"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "ip6 daddr 2001:db8::53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "none",
+        "dns": null,
+        "cgroup": "system.slice/system-test.slice"
+      },
+      "dns_addresses": [],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "sample": [
+          "system.slice/system-test.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "counter reject"
+          ]
+        ]
+      },
+      "priority": -175,
+      "comment": "pwrap native services"
+    },
+    "ok": true,
+    "result": "create table inet fixture { comment \"pwrap native services\"; }\nadd chain inet fixture output { type filter hook output priority -175; policy accept; }\nadd chain inet fixture sample\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-test.slice\" jump sample\nadd rule inet fixture sample ct state { invalid, untracked } counter drop\nadd rule inet fixture sample ct direction reply return\nadd rule inet fixture sample counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "dns": [],
+        "cgroup": "system.slice/system-test.slice"
+      },
+      "dns_addresses": [],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "sample": [
+          "system.slice/system-test.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -175,
+      "comment": "pwrap native services"
+    },
+    "ok": true,
+    "result": "create table inet fixture { comment \"pwrap native services\"; }\nadd chain inet fixture output { type filter hook output priority -175; policy accept; }\nadd chain inet fixture sample\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-test.slice\" jump sample\nadd rule inet fixture sample ct state { invalid, untracked } counter drop\nadd rule inet fixture sample ct direction reply return\nadd rule inet fixture sample meta l4proto { tcp, udp } th dport { 53 } counter reject\nadd rule inet fixture sample fib daddr type { local, anycast } counter reject\nadd rule inet fixture sample ip daddr 127.0.0.0/8 counter reject\nadd rule inet fixture sample ip6 daddr ::1 counter reject\nadd rule inet fixture sample fib daddr type { broadcast, multicast } counter reject\nadd rule inet fixture sample ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet fixture sample ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "dns": [
+          "::1"
+        ],
+        "cgroup": "system.slice/system-test.slice"
+      },
+      "dns_addresses": [
+        "::1"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "sample": [
+          "system.slice/system-test.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -175,
+      "comment": "pwrap native services"
+    },
+    "ok": true,
+    "result": "create table inet fixture { comment \"pwrap native services\"; }\nadd chain inet fixture output { type filter hook output priority -175; policy accept; }\nadd chain inet fixture sample\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-test.slice\" jump sample\nadd rule inet fixture sample ct state { invalid, untracked } counter drop\nadd rule inet fixture sample ct direction reply return\nadd rule inet fixture sample ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet fixture sample meta l4proto { tcp, udp } th dport { 53 } counter reject\nadd rule inet fixture sample fib daddr type { local, anycast } counter reject\nadd rule inet fixture sample ip daddr 127.0.0.0/8 counter reject\nadd rule inet fixture sample ip6 daddr ::1 counter reject\nadd rule inet fixture sample fib daddr type { broadcast, multicast } counter reject\nadd rule inet fixture sample ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet fixture sample ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "none",
+        "dns": null,
+        "cgroup": "system.slice/system-deny.slice"
+      },
+      "dns_addresses": [],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "counter reject"
+    ]
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "dns": null,
+        "cgroup": "system.slice/system-internet.slice"
+      },
+      "dns_addresses": [
+        "::1"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "dns": null,
+        "cgroup": "system.slice/system-second.slice"
+      },
+      "dns_addresses": [
+        "::1"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "deny": [
+          "system.slice/system-deny.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "counter reject"
+          ]
+        ],
+        "internet": [
+          "system.slice/system-internet.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ],
+        "second": [
+          "system.slice/system-second.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -175,
+      "comment": "pwrap native services"
+    },
+    "ok": true,
+    "result": "create table inet fixture { comment \"pwrap native services\"; }\nadd chain inet fixture output { type filter hook output priority -175; policy accept; }\nadd chain inet fixture deny\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-deny.slice\" jump deny\nadd rule inet fixture deny ct state { invalid, untracked } counter drop\nadd rule inet fixture deny ct direction reply return\nadd rule inet fixture deny counter reject\nadd chain inet fixture internet\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-internet.slice\" jump internet\nadd rule inet fixture internet ct state { invalid, untracked } counter drop\nadd rule inet fixture internet ct direction reply return\nadd rule inet fixture internet ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet fixture internet meta l4proto { tcp, udp } th dport { 53 } counter reject\nadd rule inet fixture internet fib daddr type { local, anycast } counter reject\nadd rule inet fixture internet ip daddr 127.0.0.0/8 counter reject\nadd rule inet fixture internet ip6 daddr ::1 counter reject\nadd rule inet fixture internet fib daddr type { broadcast, multicast } counter reject\nadd rule inet fixture internet ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet fixture internet ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\nadd chain inet fixture second\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-second.slice\" jump second\nadd rule inet fixture second ct state { invalid, untracked } counter drop\nadd rule inet fixture second ct direction reply return\nadd rule inet fixture second ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet fixture second meta l4proto { tcp, udp } th dport { 53 } counter reject\nadd rule inet fixture second fib daddr type { local, anycast } counter reject\nadd rule inet fixture second ip daddr 127.0.0.0/8 counter reject\nadd rule inet fixture second ip6 daddr ::1 counter reject\nadd rule inet fixture second fib daddr type { broadcast, multicast } counter reject\nadd rule inet fixture second ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet fixture second ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "dns": null,
+        "cgroup": "system.slice/system-internet.slice"
+      },
+      "dns_addresses": [
+        "127.0.0.53"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "dns": null,
+        "cgroup": "system.slice/system-second.slice"
+      },
+      "dns_addresses": [
+        "127.0.0.53"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "fixture",
+      "entries": {
+        "deny": [
+          "system.slice/system-deny.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "counter reject"
+          ]
+        ],
+        "internet": [
+          "system.slice/system-internet.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ],
+        "second": [
+          "system.slice/system-second.slice",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -175,
+      "comment": "pwrap native services"
+    },
+    "ok": true,
+    "result": "create table inet fixture { comment \"pwrap native services\"; }\nadd chain inet fixture output { type filter hook output priority -175; policy accept; }\nadd chain inet fixture deny\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-deny.slice\" jump deny\nadd rule inet fixture deny ct state { invalid, untracked } counter drop\nadd rule inet fixture deny ct direction reply return\nadd rule inet fixture deny counter reject\nadd chain inet fixture internet\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-internet.slice\" jump internet\nadd rule inet fixture internet ct state { invalid, untracked } counter drop\nadd rule inet fixture internet ct direction reply return\nadd rule inet fixture internet ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet fixture internet meta l4proto { tcp, udp } th dport { 53 } counter reject\nadd rule inet fixture internet fib daddr type { local, anycast } counter reject\nadd rule inet fixture internet ip daddr 127.0.0.0/8 counter reject\nadd rule inet fixture internet ip6 daddr ::1 counter reject\nadd rule inet fixture internet fib daddr type { broadcast, multicast } counter reject\nadd rule inet fixture internet ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet fixture internet ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\nadd chain inet fixture second\nadd rule inet fixture output socket cgroupv2 level 2 \"system.slice/system-second.slice\" jump second\nadd rule inet fixture second ct state { invalid, untracked } counter drop\nadd rule inet fixture second ct direction reply return\nadd rule inet fixture second ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet fixture second meta l4proto { tcp, udp } th dport { 53 } counter reject\nadd rule inet fixture second fib daddr type { local, anycast } counter reject\nadd rule inet fixture second ip daddr 127.0.0.0/8 counter reject\nadd rule inet fixture second ip6 daddr ::1 counter reject\nadd rule inet fixture second fib daddr type { broadcast, multicast } counter reject\nadd rule inet fixture second ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet fixture second ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "dns": [
+          "not an IP"
+        ],
+        "cgroup": "system.slice/system-internet.slice"
+      },
+      "dns_addresses": [
+        "not an IP"
+      ],
+      "denied_ports": [],
+      "canary": null,
+      "dns_ports": [
+        53
+      ]
+    },
+    "ok": false
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "allowLocalhost": true,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "internet",
+              "allowLocalhost": true,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [
+                53
+              ],
+              "resolverText": "nameserver 127.0.0.53",
+              "dnsAddresses": [
+                "127.0.0.53",
+                "::1"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53",
+        "::1"
+      ],
+      "denied_ports": [
+        53
+      ],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 53 } counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+      "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 return",
+      "ip6 daddr ::1 return",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 53 } counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+            "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 return",
+            "ip6 daddr ::1 return",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 53 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip6 daddr { ::1/128 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { broadcast, multicast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "allowLocalhost": false,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "internet",
+              "allowLocalhost": false,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [
+                3128
+              ],
+              "resolverText": "nameserver 127.0.0.53",
+              "dnsAddresses": [
+                "127.0.0.53",
+                "::1"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53",
+        "::1"
+      ],
+      "denied_ports": [
+        3128
+      ],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { broadcast, multicast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "allowLocalhost": true,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "internet",
+              "allowLocalhost": true,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [
+                3128
+              ],
+              "resolverText": "nameserver 127.0.0.53",
+              "dnsAddresses": [
+                "127.0.0.53",
+                "::1"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53",
+        "::1"
+      ],
+      "denied_ports": [
+        3128
+      ],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+      "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 return",
+      "ip6 daddr ::1 return",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+            "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 return",
+            "ip6 daddr ::1 return",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip6 daddr { ::1/128 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { broadcast, multicast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "lan",
+        "allowLocalhost": false,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "lan",
+              "allowLocalhost": false,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [
+                3128
+              ],
+              "resolverText": "nameserver 127.0.0.53",
+              "dnsAddresses": [
+                "127.0.0.53",
+                "::1"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53",
+        "::1"
+      ],
+      "denied_ports": [
+        3128
+      ],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "lan",
+        "allowLocalhost": true,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "lan",
+              "allowLocalhost": true,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [
+                3128
+              ],
+              "resolverText": "nameserver 127.0.0.53",
+              "dnsAddresses": [
+                "127.0.0.53",
+                "::1"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53",
+        "::1"
+      ],
+      "denied_ports": [
+        3128
+      ],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+      "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 return",
+      "ip6 daddr ::1 return",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+            "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 return",
+            "ip6 daddr ::1 return",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } meta l4proto { tcp, udp } th dport { 3128 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip6 daddr { ::1/128 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "local",
+        "allowLocalhost": false,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "local",
+              "allowLocalhost": false,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [
+                3128
+              ],
+              "resolverText": "",
+              "dnsAddresses": []
+            }
+          }
+        }
+      },
+      "dns_addresses": [],
+      "denied_ports": [
+        3128
+      ],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+      "ip6 daddr { fc00::/7, fe80::/10 } return",
+      "counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+            "ip6 daddr { fc00::/7, fe80::/10 } return",
+            "counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 3128 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { fc00::/7, fe80::/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "local",
+        "allowLocalhost": true,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "local",
+              "allowLocalhost": true,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [
+                3128
+              ],
+              "resolverText": "",
+              "dnsAddresses": []
+            }
+          }
+        }
+      },
+      "dns_addresses": [],
+      "denied_ports": [
+        3128
+      ],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+      "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr { 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+      "ip6 daddr { ::1/128, fc00::/7, fe80::/10 } return",
+      "counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "meta l4proto { tcp, udp } th dport { 3128 } counter reject",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+            "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr { 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+            "ip6 daddr { ::1/128, fc00::/7, fe80::/10 } return",
+            "counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 3128 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip6 daddr { ::1/128 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { ::1/128, fc00::/7, fe80::/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted counter reject\n"
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": true,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": [
+          "/tmp/tmpmur4dvq3/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": "a",
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": [
+          "/tmp/tmpmur4dvq3/profile"
+        ],
+        "readOnly": [
+          "/"
+        ],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": [
+          "/tmp/tmpmur4dvq3/home"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": [
+          "/tmp/tmpmur4dvq3/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "HOME;exit"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": [
+          "/tmp/tmpmur4dvq3/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": []
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "relative",
+        "writable": [
+          "/tmp/tmpmur4dvq3/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": [
+          "/tmp/tmpmur4dvq3/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "tools": {
+          "bwrap": "/tool"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpmur4dvq3/home",
+        "writable": [
+          "/tmp/tmpmur4dvq3/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpmur4dvq3/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "typo": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp67j278uj/home",
+        "writable": [
+          "/tmp/tmp67j278uj/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp67j278uj/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "network": "host"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp67j278uj/home",
+        "writable": [
+          "/tmp/tmp67j278uj/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp67j278uj/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "network": "internet"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp67j278uj/home",
+        "writable": [
+          "/tmp/tmp67j278uj/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp67j278uj/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "desktop": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp67j278uj/home",
+        "writable": [
+          "/tmp/tmp67j278uj/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp67j278uj/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "gpu": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp67j278uj/home",
+        "writable": [
+          "/tmp/tmp67j278uj/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp67j278uj/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "dbusOwn": [
+          "org.example.App"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp67j278uj/home",
+        "writable": [
+          "/tmp/tmp67j278uj/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp67j278uj/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "memoryMax": "1G"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp67j278uj/home",
+        "writable": [
+          "/tmp/tmp67j278uj/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp67j278uj/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "tasksMax": 10
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp_mdjibyb/home",
+        "writable": [
+          "/tmp/tmp_mdjibyb/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp_mdjibyb/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpiuq6r_30/home",
+        "writable": [
+          "/tmp/tmpiuq6r_30/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [
+          "/tmp/tmpiuq6r_30/trusted-controller/selected"
+        ],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpiuq6r_30/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpi9vqmtna/home",
+        "writable": [
+          "/tmp/tmpi9vqmtna/alias"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpi9vqmtna/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmpi9vqmtna/home",
+        "writable": [
+          "/tmp/tmpi9vqmtna/profile"
+        ],
+        "readOnly": [
+          "/tmp/tmpi9vqmtna/alias"
+        ],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmpi9vqmtna/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ],
+        "name": "run",
+        "closure": "/tmp/tmphy6lwirj/closure"
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmptn22qwam/home",
+        "writable": [
+          "/tmp/tmptn22qwam/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmptn22qwam/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload",
+          "argument",
+          ""
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp0zkb4p5m/home",
+        "writable": [
+          "/tmp/tmp0zkb4p5m/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp0zkb4p5m/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "schemaVersion": 1,
+        "execution": "direct",
+        "home": "/tmp/tmp8tueyy83/home",
+        "writable": [
+          "/tmp/tmp8tueyy83/profile"
+        ],
+        "readOnly": [],
+        "persist": [],
+        "forbiddenWrites": [],
+        "immutableData": [],
+        "inheritEnvironment": [
+          "VERBOSE"
+        ],
+        "closure": "/tmp/tmp8tueyy83/closure",
+        "command": [
+          "/nix/store/00000000000000000000000000000000-payload"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "desktop": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "desktop": true,
+        "gpu": false
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "desktop": false,
+        "gpu": false
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "desktop": false,
+        "gpu": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "desktop": true,
+        "gpu": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": true,
+        "sharedTmp": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": true,
+        "sharedTmp": true,
+        "writable": [
+          "/new-grant"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": true,
+        "sharedTmp": true,
+        "network": "host"
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": false,
+        "sharedTmp": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": true,
+        "sharedTmp": true,
+        "environment": {
+          "GTK_THEME": "ExplicitChange"
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": true,
+        "sharedTmp": false
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/different/bin/app"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": true,
+        "sharedTmp": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app",
+          "https://example.invalid/"
+        ],
+        "manifest": "/nix/store/profile.json",
+        "desktop": true,
+        "gpu": true,
+        "sharedTmp": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "local",
+        "allowLocalhost": false,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "local",
+              "allowLocalhost": false,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [],
+              "resolverText": "",
+              "dnsAddresses": []
+            }
+          }
+        }
+      },
+      "dns_addresses": [],
+      "denied_ports": [],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+      "ip6 daddr { fc00::/7, fe80::/10 } return",
+      "counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+            "ip6 daddr { fc00::/7, fe80::/10 } return",
+            "counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { fc00::/7, fe80::/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "local",
+        "allowLocalhost": true,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "local",
+              "allowLocalhost": true,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [],
+              "resolverText": "",
+              "dnsAddresses": []
+            }
+          }
+        }
+      },
+      "dns_addresses": [],
+      "denied_ports": [],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+      "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr { 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+      "ip6 daddr { ::1/128, fc00::/7, fe80::/10 } return",
+      "counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+            "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr { 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return",
+            "ip6 daddr { ::1/128, fc00::/7, fe80::/10 } return",
+            "counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip6 daddr { ::1/128 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 100.64.0.0/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { ::1/128, fc00::/7, fe80::/10 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "allowLocalhost": false,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "internet",
+              "allowLocalhost": false,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [],
+              "resolverText": "nameserver 127.0.0.53\n",
+              "dnsAddresses": [
+                "127.0.0.53"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53"
+      ],
+      "denied_ports": [],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { broadcast, multicast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "internet",
+        "allowLocalhost": true,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "internet",
+              "allowLocalhost": true,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [],
+              "resolverText": "nameserver 127.0.0.53\n",
+              "dnsAddresses": [
+                "127.0.0.53"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53"
+      ],
+      "denied_ports": [],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+      "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 return",
+      "ip6 daddr ::1 return",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject",
+      "fib daddr type { broadcast, multicast } counter reject",
+      "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+      "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+            "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 return",
+            "ip6 daddr ::1 return",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject",
+            "fib daddr type { broadcast, multicast } counter reject",
+            "ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject",
+            "ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip6 daddr { ::1/128 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { broadcast, multicast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr { 0.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr { ::/128, fe80::/10, fc00::/7, ff00::/8 } counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "lan",
+        "allowLocalhost": false,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "lan",
+              "allowLocalhost": false,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [],
+              "resolverText": "nameserver 127.0.0.53\n",
+              "dnsAddresses": [
+                "127.0.0.53"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53"
+      ],
+      "denied_ports": [],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\n"
+  },
+  {
+    "operation": "egress",
+    "arguments": {
+      "policy": {
+        "network": "lan",
+        "allowLocalhost": true,
+        "allowLAN": true,
+        "unit": "pwrap-probe-1234567890.service",
+        "networkTable": "pwrap_11111111111111111111111111111111",
+        "canary": 54321,
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "version": 1,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "lan",
+              "allowLocalhost": true,
+              "allowLAN": true,
+              "settings": {
+                "localDeniedPorts": [],
+                "relayServices": []
+              }
+            },
+            "state": {
+              "deniedPorts": [],
+              "resolverText": "nameserver 127.0.0.53\n",
+              "dnsAddresses": [
+                "127.0.0.53"
+              ]
+            }
+          }
+        }
+      },
+      "dns_addresses": [
+        "127.0.0.53"
+      ],
+      "denied_ports": [],
+      "canary": 54321,
+      "dns_ports": [
+        53,
+        853
+      ]
+    },
+    "ok": true,
+    "result": [
+      "ct state { invalid, untracked } counter drop",
+      "ct direction reply return",
+      "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+      "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+      "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+      "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+      "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+      "fib daddr type { local, anycast } counter reject",
+      "ip daddr 127.0.0.0/8 return",
+      "ip6 daddr ::1 return",
+      "ip daddr 127.0.0.0/8 counter reject",
+      "ip6 daddr ::1 counter reject"
+    ]
+  },
+  {
+    "operation": "table",
+    "arguments": {
+      "table": "pwrap_11111111111111111111111111111111",
+      "entries": {
+        "restricted": [
+          "system.slice/pwrap-probe-1234567890.service",
+          [
+            "ct state { invalid, untracked } counter drop",
+            "ct direction reply return",
+            "ip daddr 127.0.0.1 tcp dport 54321 counter reject",
+            "ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return",
+            "meta l4proto { tcp, udp } th dport { 53, 853 } counter reject",
+            "fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return",
+            "fib daddr type { local, anycast } ip6 daddr { ::1/128 } return",
+            "fib daddr type { local, anycast } counter reject",
+            "ip daddr 127.0.0.0/8 return",
+            "ip6 daddr ::1 return",
+            "ip daddr 127.0.0.0/8 counter reject",
+            "ip6 daddr ::1 counter reject"
+          ]
+        ]
+      },
+      "priority": -174,
+      "comment": "pwrap egress"
+    },
+    "ok": true,
+    "result": "create table inet pwrap_11111111111111111111111111111111 { comment \"pwrap egress\"; }\nadd chain inet pwrap_11111111111111111111111111111111 output { type filter hook output priority -174; policy accept; }\nadd chain inet pwrap_11111111111111111111111111111111 restricted\nadd rule inet pwrap_11111111111111111111111111111111 output socket cgroupv2 level 2 \"system.slice/pwrap-probe-1234567890.service\" jump restricted\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct state { invalid, untracked } counter drop\nadd rule inet pwrap_11111111111111111111111111111111 restricted ct direction reply return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.1 tcp dport 54321 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.53 meta l4proto { tcp, udp } th dport 53 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted meta l4proto { tcp, udp } th dport { 53, 853 } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip daddr { 127.0.0.0/8 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } ip6 daddr { ::1/128 } return\nadd rule inet pwrap_11111111111111111111111111111111 restricted fib daddr type { local, anycast } counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 return\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip daddr 127.0.0.0/8 counter reject\nadd rule inet pwrap_11111111111111111111111111111111 restricted ip6 daddr ::1 counter reject\n"
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/app"
+        ],
+        "snapshots": {
+          "network-v1": {
+            "request": {
+              "allowLAN": false,
+              "allowLocalhost": true,
+              "compiler": "/home/база данных/проекты/utilite/pwrap/home/code/main/backends/nixos/network.py",
+              "network": "internet",
+              "settings": {
+                "localDeniedPorts": [
+                  3128
+                ],
+                "relayServices": [
+                  "relay.service"
+                ]
+              },
+              "version": 1
+            },
+            "state": {
+              "deniedPorts": [
+                3128,
+                40000
+              ],
+              "resolverText": "nameserver 127.0.0.53\n",
+              "dnsAddresses": [
+                "127.0.0.53"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "audio": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "sound": "nixos"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "audio": true
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "audio": "auto"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "audio": []
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "audio": true,
+        "providers": {
+          "audio": null
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "audio": true,
+        "providers": {
+          "audio": "nixos"
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "audio": false,
+        "providers": {
+          "audio": "nixos"
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "audio": true,
+        "providers": {
+          "audio": "direct"
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "audio": false,
+        "providers": {
+          "audio": "direct"
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "audio": null
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/nix/store/example/bin/true"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "immutableData": [
+          "/trusted/selected-alias"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "netwrok": "host"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "schemaVersion": 2
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "desktop": "false"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": []
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": "sh"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "network": "offline"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "tasksMax": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "tasksMax": 0
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "memoryMax": "4G\nProtectHome=no"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "environment": {
+          "BAD NAME": "x"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "environment": {
+          "OK": 1
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "network": "none",
+        "allowLocalhost": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "network": "local",
+        "openWeb": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "true"
+        ],
+        "network": "local",
+        "dbusTalk": [
+          "*"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "forbiddenWrites": [
+          "/trusted/controller"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "forbiddenWrites": "/trusted/controller"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "forbiddenWrites": [
+          42
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "forbiddenWrites": [
+          ""
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "forbiddenWrites": [
+          "bad\u0000path"
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/app"
+        ],
+        "network": "local"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/app"
+        ],
+        "network": "local",
+        "allowLAN": false
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/app"
+        ],
+        "network": "local",
+        "allowLocalhost": false
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/app"
+        ],
+        "network": "local",
+        "allowLAN": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "/app"
+        ],
+        "network": "local",
+        "allowLocalhost": true
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "networkConfig": {
+          "localDeniedPorts": [
+            2080
+          ]
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "networkConfig": null
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "networkConfig": []
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "networkConfig": "auto"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "networkConfig": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openWeb": true
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "webBrowser": "direct"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "providers": {
+          "webBrowser": true
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openWeb": true,
+        "providers": {
+          "webBrowser": null
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openWeb": false,
+        "providers": {
+          "webBrowser": "broker"
+        }
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openWeb": true,
+        "providers": {
+          "webBrowser": "broker"
+        }
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "network": "local",
+        "openWeb": true
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "name": "app",
+        "command": [
+          "/nix/store/app/bin/app"
+        ]
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "audio": true,
+        "providers": {
+          "audio": "nixos"
+        },
+        "environment": {
+          "PULSE_SERVER": "unix:/other",
+          "PULSE_COOKIE": "/other"
+        }
+      }
+    },
+    "ok": true,
+    "result": null
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openWeb": true,
+        "providers": {
+          "webBrowser": "broker"
+        },
+        "environment": {
+          "QT_PLUGIN_PATH": "/source-app-specific"
+        }
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "tg"
+        ],
+        "providers": {
+          "uris": "broker"
+        }
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "tg"
+        ]
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": "tg"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          1
+        ]
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "tg"
+        ],
+        "providers": {
+          "uris": "direct"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "http"
+        ],
+        "providers": {
+          "uris": "broker"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "file"
+        ],
+        "providers": {
+          "uris": "broker"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "TG"
+        ],
+        "providers": {
+          "uris": "broker"
+        }
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openUris": [
+          "tg"
+        ],
+        "providers": {
+          "uris": "broker"
+        },
+        "network": "local"
+      }
+    },
+    "ok": false
+  },
+  {
+    "operation": "policy",
+    "arguments": {
+      "policy": {
+        "command": [
+          "app"
+        ],
+        "openWeb": true,
+        "openUris": [
+          "tg"
+        ],
+        "providers": {
+          "webBrowser": "broker",
+          "uris": "broker"
+        }
+      }
+    },
+    "ok": false,
+    "policyChange": "Open configuration now uses providers.uri/providers.openFile; obsolete flat permissions/providers are rejected."
+  }
+]

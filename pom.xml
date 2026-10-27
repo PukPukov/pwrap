@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ru.pukpukov</groupId><artifactId>puklapom</artifactId><version>1.4.10</version>
+    <relativePath>../../lib/puklapom/pom.xml</relativePath>
+  </parent>
+  <artifactId>pwrap</artifactId><version>0.1.0-beta.1</version>
+  <properties>
+    <main>ru.pukpukov.pwrap.Main</main>
+    <java.version>25</java.version>
+    <puklapom.use-ancap-commons>false</puklapom.use-ancap-commons>
+    <puklapom.extended>false</puklapom.extended>
+    <project.build.outputTimestamp>1980-01-01T00:00:02Z</project.build.outputTimestamp>
+  </properties>
+  <dependencies>
+    <!-- @Nullable also defines required record fields at the reflective Gson boundary. -->
+    <dependency><groupId>org.checkerframework</groupId><artifactId>checker-qual</artifactId><scope>compile</scope></dependency>
+    <dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId><version>2.13.2</version></dependency>
+    <dependency><groupId>org.graalvm.sdk</groupId><artifactId>nativeimage</artifactId><version>25.0.2</version><scope>provided</scope></dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>home/code/src/main/java</sourceDirectory>
+    <testSourceDirectory>home/code/src/test/java</testSourceDirectory>
+    <finalName>pwrap</finalName>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><configuration>
+        <proc>full</proc>
+        <!-- Keep every puklapom processor; add trust-flow checking without replacing them. -->
+        <annotationProcessors combine.children="append">
+          <annotationProcessor>org.checkerframework.checker.tainting.TaintingChecker</annotationProcessor>
+        </annotationProcessors>
+        <!-- Do not inherit the parent's test-directory exclusion. -->
+        <compilerArgs combine.self="override"><arg>-Xlint:all</arg><arg>-Xmaxerrs</arg><arg>1000</arg><arg>-Astubs=${project.basedir}/home/code/src/main/checker/gson.astub</arg></compilerArgs>
+      </configuration></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><configuration>
+        <!-- Processor lives on its own path; its fat jar duplicates checker-qual's JPMS name. -->
+        <classpathDependencyExcludes><classpathDependencyExclude>org.checkerframework:checker</classpathDependencyExclude></classpathDependencyExcludes>
+      </configuration></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><configuration><createDependencyReducedPom>false</createDependencyReducedPom><shadedArtifactAttached>true</shadedArtifactAttached><shadedClassifierName>all</shadedClassifierName></configuration></plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile><id>native-tests</id>
+      <dependencies><dependency><groupId>org.junit.platform</groupId><artifactId>junit-platform-launcher</artifactId><version>${junit-jupiter.version}</version><scope>test</scope></dependency></dependencies>
+      <build><plugins><plugin>
+        <groupId>org.graalvm.buildtools</groupId><artifactId>native-maven-plugin</artifactId><version>0.11.1</version><extensions>true</extensions>
+        <executions><execution><id>native-tests</id><phase>test</phase><goals><goal>test</goal></goals></execution></executions>
+        <configuration><fallback>false</fallback><metadataRepository><enabled>false</enabled></metadataRepository>
+          <buildArgs><buildArg>-O1</buildArg><buildArg>-march=compatibility</buildArg><buildArg>--features=ru.pukpukov.pwrap.NativeTypes</buildArg></buildArgs>
+        </configuration>
+      </plugin></plugins></build>
+    </profile>
+    <!-- Nix/other nonstandard libc layouts supply an explicit link search path. -->
+    <profile><id>native-library-path</id>
+      <activation><property><name>native.library.path</name></property></activation>
+      <build><plugins><plugin>
+        <groupId>org.graalvm.buildtools</groupId><artifactId>native-maven-plugin</artifactId><version>0.11.1</version>
+        <configuration><buildArgs combine.children="append"><buildArg>-H:CLibraryPath=${native.library.path}</buildArg></buildArgs></configuration>
+      </plugin></plugins></build>
+    </profile>
+    <profile><id>native</id><build><plugins><plugin>
+      <groupId>org.graalvm.buildtools</groupId><artifactId>native-maven-plugin</artifactId><version>0.11.1</version>
+      <executions><execution><id>native</id><phase>package</phase><goals><goal>compile-no-fork</goal></goals></execution></executions>
+      <configuration><imageName>pwrap</imageName><mainClass>${main}</mainClass><fallback>false</fallback><metadataRepository><enabled>false</enabled></metadataRepository>
+        <buildArgs><buildArg>-H:+ReportExceptionStackTraces</buildArg><buildArg>-march=compatibility</buildArg><buildArg>--features=ru.pukpukov.pwrap.NativeTypes</buildArg></buildArgs>
+      </configuration>
+    </plugin></plugins></build></profile>
+  </profiles>
+</project>

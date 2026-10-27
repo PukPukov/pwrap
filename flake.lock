@@ -1,0 +1,63 @@
+{
+  "nodes": {
+    "bubblewrap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791980037,
+        "narHash": "sha256-sgIATYiBYbHaftA+ShIqfxS3OScz7VurjPciL2WB1oQ=",
+        "owner": "containers",
+        "repo": "bubblewrap",
+        "rev": "362936aea0d5c6e70f7af75d2d44b5a914cb4ba2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "containers",
+        "ref": "v0.13.1",
+        "repo": "bubblewrap",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1791883866,
+        "narHash": "sha256-yvkDdToRZ4IgPc9tSBzzCYJvTLf8n5eE3rgUkpCuD5A=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "bubblewrap": "bubblewrap",
+        "nixpkgs": "nixpkgs",
+        "wayland-firewall": "wayland-firewall"
+      }
+    },
+    "wayland-firewall": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788455416,
+        "narHash": "sha256-Gl7N8vB2dmAU7rUPbM33p9xDoktfzWhjeg4s4VkQf+o=",
+        "owner": "wochap",
+        "repo": "wayland-firewall",
+        "rev": "bfa5f6367f5aa1fba104ecac48590dbe08227a37",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wochap",
+        "repo": "wayland-firewall",
+        "rev": "bfa5f6367f5aa1fba104ecac48590dbe08227a37",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

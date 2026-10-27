@@ -1,0 +1,335 @@
+--- a/dbus-proxy.c
++++ b/dbus-proxy.c
+@@ -59,6 +59,9 @@
+            "    --args=FD                    Read arguments from FD\n\n"
+            "Proxy Options:\n"
+            "    --filter                     Enable filtering\n"
++           "    --pwrap-portal-open=SCHEMES   Enforce portal open policy (comma separated)\n"
++           "    --pwrap-portal-file-ask=BOOL Enforce file chooser policy (default true)\n"
++           "    --pwrap-portal-uri-ask=BOOL  Enforce URI chooser policy (default false)\n"
+            "    --deny-proxy-socket-fds      Reject FDs connected to a pwrap profile proxy\n"
+            "    --log                        Turn on logging\n"
+            "    --sloppy-names               Report name changes for unique names\n"
+@@ -336,6 +339,26 @@
+           flatpak_proxy_set_deny_proxy_socket_fds (proxy, TRUE);
+           *args_i += 1;
+         }
++      else if (g_str_has_prefix (arg, "--pwrap-portal-open="))
++        {
++          if (!flatpak_proxy_set_portal_open (proxy, arg + strlen ("--pwrap-portal-open="), &error))
++            {
++              g_printerr ("Invalid portal open policy: %s\n", error->message);
++              return FALSE;
++            }
++          *args_i += 1;
++        }
++      else if (g_str_has_prefix (arg, "--pwrap-portal-file-ask=") ||
++               g_str_has_prefix (arg, "--pwrap-portal-uri-ask="))
++        {
++          if (!flatpak_proxy_set_portal_ask (proxy,
++                g_str_has_prefix (arg, "--pwrap-portal-file-ask="), strchr (arg, '=') + 1, &error))
++            {
++              g_printerr ("Invalid portal ask policy: %s\n", error->message);
++              return FALSE;
++            }
++          *args_i += 1;
++        }
+       else if (g_str_equal (arg, "--sloppy-names"))
+         {
+           /* This means we're reporting the name changes for all unique names,
+--- a/flatpak-proxy.c
++++ b/flatpak-proxy.c
+@@ -420,6 +420,10 @@
+ 
+   gboolean       filter;
+   gboolean       deny_proxy_socket_fds;
++  char         **portal_open_schemes;
++  gboolean       portal_file_ask;
++  gboolean       portal_uri_ask;
++  guint          portal_ask_configured;
+   gboolean       sloppy_names;
+ 
+   GHashTable    *filters;
+@@ -586,6 +590,52 @@
+   proxy->deny_proxy_socket_fds = deny_proxy_socket_fds;
+ }
+ 
++/* Trusted command-line policy. Empty means deny all open actions; NULL means
++ * this optional policy is not enabled. It never grants a D-Bus method itself. */
++gboolean
++flatpak_proxy_set_portal_open (FlatpakProxy *proxy, const char *schemes, GError **error)
++{
++  g_auto(GStrv) parsed = g_strsplit (schemes, ",", -1);
++  guint i;
++
++  if (proxy->portal_open_schemes != NULL)
++    goto invalid;
++  for (i = 0; parsed[i] != NULL; i++)
++    {
++      const char *p = parsed[i];
++      if (!g_ascii_islower (*p))
++        goto invalid;
++      for (p++; *p != 0; p++)
++        if (!g_ascii_islower (*p) && !g_ascii_isdigit (*p) &&
++            *p != '+' && *p != '-' && *p != '.')
++          goto invalid;
++    }
++  proxy->portal_open_schemes = g_steal_pointer (&parsed);
++  return TRUE;
++
++invalid:
++  g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
++                       "Expected one lowercase URI scheme list");
++  return FALSE;
++}
++
++gboolean
++flatpak_proxy_set_portal_ask (FlatpakProxy *proxy, gboolean file, const char *value, GError **error)
++{
++  guint bit = file ? 1 : 2;
++  if ((proxy->portal_ask_configured & bit) != 0 ||
++      (!g_str_equal (value, "true") && !g_str_equal (value, "false")))
++    {
++      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
++                           "Expected one true/false portal ask policy per operation");
++      return FALSE;
++    }
++  if (file) proxy->portal_file_ask = g_str_equal (value, "true");
++  else proxy->portal_uri_ask = g_str_equal (value, "true");
++  proxy->portal_ask_configured |= bit;
++  return TRUE;
++}
++
+ void
+ flatpak_proxy_set_sloppy_names (FlatpakProxy *proxy,
+                                 gboolean      sloppy_names)
+@@ -808,6 +858,7 @@
+ 
+   g_free (proxy->socket_path);
+   g_free (proxy->dbus_address);
++  g_strfreev (proxy->portal_open_schemes);
+ 
+   G_OBJECT_CLASS (flatpak_proxy_parent_class)->finalize (object);
+ }
+@@ -2150,6 +2201,119 @@
+   return buffer;
+ }
+ 
++/* Apply after ordinary method authorization and SCM_RIGHTS framing. Match by
++ * interface/member, not destination spelling: unique-owner aliases and omitted
++ * interfaces must not evade this policy. Only a bounded portal body is decoded;
++ * GLib preserves byte order, serials, flags and FD indices on reserialization. */
++static gboolean
++filter_portal_open (FlatpakProxyClient *client, Header *header, Buffer **buffer)
++{
++  FlatpakProxy *proxy = client->proxy;
++  g_autoptr(GDBusMessage) message = NULL;
++  g_autoptr(GVariant) options = NULL;
++  g_autofree guchar *blob = NULL;
++  g_autoptr(GUri) uri_info = NULL;
++  const char *scheme;
++  GVariant *body;
++  const char *parent, *uri = NULL;
++  int fd = -1;
++  GVariantDict dict;
++  gsize size;
++  Buffer *rewritten;
++  gboolean file = g_strcmp0 (header->member, "OpenFile") == 0;
++
++  if (proxy->portal_open_schemes == NULL || header->type != G_DBUS_MESSAGE_TYPE_METHOD_CALL)
++    return TRUE;
++  if (header->interface != NULL &&
++      !g_str_equal (header->interface, "org.freedesktop.portal.OpenURI"))
++    return TRUE;
++  if (header->interface == NULL && !file &&
++      g_strcmp0 (header->member, "OpenURI") != 0 &&
++      g_strcmp0 (header->member, "OpenDirectory") != 0)
++    return TRUE;
++  if (g_strcmp0 (header->path, "/org/freedesktop/portal/desktop") != 0 ||
++      (*buffer)->size > 65536)
++    return FALSE;
++
++  message = g_dbus_message_new_from_blob ((*buffer)->data, (*buffer)->size,
++                                         G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING, NULL);
++  if (message == NULL || (body = g_dbus_message_get_body (message)) == NULL)
++    return FALSE;
++
++  if (file)
++    {
++      GList *l;
++
++      if (!g_strv_contains ((const char * const *) proxy->portal_open_schemes, "file") ||
++          !g_variant_is_of_type (body, G_VARIANT_TYPE ("(sha{sv})")))
++        return FALSE;
++      g_variant_get (body, "(&sh@a{sv})", &parent, &fd, &options);
++      if (fd < 0 || (guint) fd >= header->unix_fds)
++        return FALSE;
++
++      /* update_socket_messages already checked and associated this exact FD
++       * list with this message. Keep both its indices and ancillary ownership. */
++      for (l = (*buffer)->control_messages; l != NULL; l = l->next)
++        if (G_IS_UNIX_FD_MESSAGE (l->data))
++          g_dbus_message_set_unix_fd_list (message,
++            g_unix_fd_message_get_fd_list (G_UNIX_FD_MESSAGE (l->data)));
++      if (g_dbus_message_get_num_unix_fds (message) != header->unix_fds)
++        return FALSE;
++
++    }
++  else
++    {
++      const char *p;
++      guint i;
++      if (g_strcmp0 (header->member, "OpenURI") != 0 || header->unix_fds != 0 ||
++          !g_variant_is_of_type (body, G_VARIANT_TYPE ("(ssa{sv})")))
++        return FALSE;  /* In particular OpenDirectory does not offer ask. */
++      g_variant_get (body, "(&s&s@a{sv})", &parent, &uri, &options);
++      if (strlen (uri) == 0 || strlen (uri) > 16384)
++        return FALSE;
++      for (p = uri; *p != 0; p++)
++        if ((guchar) *p < 32 || *p == 127)
++          return FALSE;
++      uri_info = g_uri_parse (uri, G_URI_FLAGS_NONE, NULL);
++      if (uri_info == NULL || (scheme = g_uri_get_scheme (uri_info)) == NULL ||
++          g_ascii_strcasecmp (scheme, "file") == 0)
++        return FALSE;  /* Files must use OpenFile's FD + preset chooser policy. */
++      if (g_ascii_strcasecmp (scheme, "http") == 0 || g_ascii_strcasecmp (scheme, "https") == 0)
++        {
++          if (g_uri_get_host (uri_info) == NULL || *g_uri_get_host (uri_info) == 0)
++            return FALSE;
++        }
++      else if (*g_uri_get_path (uri_info) == 0 &&
++               (g_uri_get_host (uri_info) == NULL || *g_uri_get_host (uri_info) == 0))
++        return FALSE;
++      for (i = 0; proxy->portal_open_schemes[i] != NULL; i++)
++        if (g_ascii_strcasecmp (scheme, proxy->portal_open_schemes[i]) == 0)
++          break;
++      if (proxy->portal_open_schemes[i] == NULL)
++        return FALSE;
++    }
++
++  /* Collapse duplicate/wrongly-typed asks and enforce the trusted preset, never
++   * a client's preference. Files and URI schemes have independent policies. */
++  g_variant_dict_init (&dict, options);
++  g_variant_dict_insert (&dict, "ask", "b", file ? proxy->portal_file_ask : proxy->portal_uri_ask);
++  g_dbus_message_set_body (message, file
++    ? g_variant_new ("(sh@a{sv})", parent, fd, g_variant_dict_end (&dict))
++    : g_variant_new ("(ss@a{sv})", parent, uri, g_variant_dict_end (&dict)));
++
++  blob = g_dbus_message_to_blob (message, &size, G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING, NULL);
++  if (blob == NULL || size > 65536)
++    return FALSE;
++  rewritten = buffer_new (size, NULL);
++  memcpy (rewritten->data, blob, size);
++  rewritten->pos = size;
++  rewritten->control_messages = (*buffer)->control_messages;
++  (*buffer)->control_messages = NULL;
++  buffer_unref (*buffer);
++  *buffer = rewritten;
++  return TRUE;
++}
++
+ static GDBusMessage *
+ get_error_for_header (FlatpakProxyClient *client, Header *header, const char *error)
+ {
+@@ -2872,6 +3036,8 @@
+ 
+         case HANDLE_PASS:
+ handle_pass:
++          if (!filter_portal_open (client, header, &buffer))
++            goto handle_deny;
+           if (client_message_generates_reply (header))
+             {
+               if (expecting_reply == EXPECTED_REPLY_NONE)
+@@ -3495,6 +3661,7 @@
+ static void
+ flatpak_proxy_init (FlatpakProxy *proxy)
+ {
++  proxy->portal_file_ask = TRUE;
+   proxy->filters = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) filter_list_free);
+   flatpak_proxy_add_policy (proxy, "org.freedesktop.DBus", FALSE, FLATPAK_POLICY_TALK);
+ }
+@@ -3544,6 +3711,18 @@
+   GSocketAddress *address;
+   gboolean res;
+ 
++  if (proxy->portal_ask_configured != 0 && proxy->portal_open_schemes == NULL)
++    {
++      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
++                           "Portal ask policy requires an open policy");
++      return FALSE;
++    }
++  if (proxy->portal_open_schemes != NULL && !proxy->filter)
++    {
++      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
++                           "Portal open policy requires D-Bus filtering");
++      return FALSE;
++    }
+   if (proxy->deny_proxy_socket_fds && !proxy->filter)
+     {
+       g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
+--- a/flatpak-proxy.h
++++ b/flatpak-proxy.h
+@@ -49,6 +49,13 @@
+                                        gboolean      filter);
+ void         flatpak_proxy_set_deny_proxy_socket_fds (FlatpakProxy *proxy,
+                                                       gboolean      deny_proxy_socket_fds);
++gboolean     flatpak_proxy_set_portal_open (FlatpakProxy *proxy,
++                                           const char   *schemes,
++                                           GError      **error);
++gboolean     flatpak_proxy_set_portal_ask (FlatpakProxy *proxy,
++                                          gboolean      file,
++                                          const char   *value,
++                                          GError      **error);
+ void         flatpak_proxy_set_sloppy_names (FlatpakProxy *proxy,
+                                              gboolean      sloppy_names);
+ void         flatpak_proxy_add_policy (FlatpakProxy *proxy,
+--- a/tests/test-proxy.c
++++ b/tests/test-proxy.c
+@@ -136,6 +136,7 @@
+   gchar *proxy_address;
+   const gchar *proxy_path;
+   int sync_pipe;
++  const char *portal_open, *portal_file_ask, *portal_uri_ask;
+ } Fixture;
+ 
+ typedef struct
+@@ -355,6 +356,13 @@
+   char *newline;
+ 
+   f->sync_pipe = -1;
++  if (context != NULL)
++    {
++      const char * const *options = context;
++      f->portal_open = options[0];
++      f->portal_file_ask = options[1];
++      f->portal_uri_ask = options[2];
++    }
+ 
+   launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDOUT_PIPE);
+   f->dbus_daemon = g_subprocess_launcher_spawn (launcher, &error,
+@@ -468,6 +476,9 @@
+                                           f->dbus_address,
+                                           f->proxy_socket,
+                                           "--filter",
++                                          f->portal_open ? f->portal_open : "--log",
++                                          f->portal_file_ask ? f->portal_file_ask : "--log",
++                                          f->portal_uri_ask ? f->portal_uri_ask : "--log",
+                                           "--log",
+                                           "--see=" CAN_SEE_NAME,
+                                           "--talk=" CAN_TALK_NAME,
+@@ -1155,6 +1166,8 @@
+   alarm (0);
+ }
+ 
++#include "pwrap-portal-tests.c"
++
+ int
+ main (int argc,
+       char **argv)
+@@ -1167,5 +1180,6 @@
+   g_test_add ("/receive", Fixture, NULL, setup, test_receive, teardown);
+   g_test_add ("/reply", Fixture, NULL, setup, test_reply, teardown);
+ 
++  pwrap_portal_add_tests ();
+   return g_test_run ();
+ }

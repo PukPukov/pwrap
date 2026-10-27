@@ -1,0 +1,68 @@
+--- a/src/filter.rs
++++ b/src/filter.rs
+@@ -74 +74 @@
+-        FilterAction::Forward
++        FilterAction::DropAndClose
+--- a/src/proxy.rs
++++ b/src/proxy.rs
+@@ -2 +2 @@
+-use std::os::unix::io::{AsRawFd, RawFd};
++use std::os::unix::io::{AsRawFd, RawFd, OwnedFd, FromRawFd};
+@@ -126 +126 @@
+-    fds: Vec<RawFd>,
++    fds: Vec<OwnedFd>,
+@@ -132 +132 @@
+-    match recvmsg::<()>(fd, &mut iov, Some(&mut cmsg_buf), MsgFlags::MSG_NOSIGNAL) {
++    match recvmsg::<()>(fd, &mut iov, Some(&mut cmsg_buf), MsgFlags::MSG_NOSIGNAL | MsgFlags::MSG_CMSG_CLOEXEC) {
+@@ -139 +139 @@
+-                        fds.extend(received);
++                        fds.extend(received.into_iter().map(|fd| unsafe { OwnedFd::from_raw_fd(fd) }));
+@@ -142,0 +143,3 @@
++            if msg.flags.contains(MsgFlags::MSG_CTRUNC) {
++                return Err(io::Error::new(io::ErrorKind::InvalidData, "truncated descriptor message"));
++            }
+@@ -181 +184 @@
+-    let mut pending_fds: Vec<RawFd> = Vec::new();
++    let mut pending_fds: Vec<OwnedFd> = Vec::new();
+@@ -248,4 +251,2 @@
+-            send_with_fds(dst, dst_fd, &output, &fds_to_send).await?;
+-            for fd in fds_to_send {
+-                let _ = nix::unistd::close(fd);
+-            }
++            let raw_fds: Vec<RawFd> = fds_to_send.iter().map(|fd| fd.as_raw_fd()).collect();
++            send_with_fds(dst, dst_fd, &output, &raw_fds).await?;
+@@ -259,4 +259,0 @@
+-    for fd in pending_fds {
+-        let _ = nix::unistd::close(fd);
+-    }
+-
+@@ -283,0 +281 @@
++        if n == 0 { return Err(io::ErrorKind::WriteZero.into()); }
+--- a/src/wire.rs
++++ b/src/wire.rs
+@@ -44 +44 @@
+-    if size < 8 {
++    if size < 8 || size % 4 != 0 {
+@@ -110,0 +111,3 @@
++    if msg[str_start..str_end - 1].contains(&0) {
++        return Err(WireError::TruncatedString);
++    }
+@@ -356,0 +360,18 @@
++    }
++}
++
++#[cfg(test)]
++mod pwrap_tests {
++    use super::*;
++    #[test]
++    fn rejects_unaligned_header() {
++        let mut msg=1u32.to_ne_bytes().to_vec();
++        msg.extend_from_slice(&(9u32<<16).to_ne_bytes());
++        assert!(parse_header(&msg).is_err());
++    }
++    #[test]
++    fn rejects_embedded_nul_interface() {
++        let mut msg=vec![0;12];
++        msg.extend_from_slice(&4u32.to_ne_bytes());
++        msg.extend_from_slice(b"a\0b\0");
++        assert!(parse_bind_interface(&msg).is_err());

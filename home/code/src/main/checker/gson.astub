@@ -1,0 +1,15 @@
+// Gson documents both factory delegation (null) and nullable serialization input,
+// but does not expose these nullness contracts in its Java signatures.
+package com.google.gson;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+import com.google.gson.reflect.TypeToken;
+
+interface TypeAdapterFactory {
+    <T> @Nullable TypeAdapter<T> create(Gson gson, TypeToken<T> type);
+}
+
+class Gson {
+    JsonElement toJsonTree(@Nullable Object source);
+    <T> @Nullable T fromJson(JsonElement json, TypeToken<T> type);
+}

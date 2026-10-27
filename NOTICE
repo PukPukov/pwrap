@@ -1,0 +1,15 @@
+pwrap 0.1.0-beta.1
+Own launcher, policies and integration code: EPL-2.0, as selected by the author.
+
+Runtime dependencies are separate projects with their own licenses:
+bubblewrap, libseccomp, slirp4netns, systemd, nftables, Nix, GraalVM, Gson,
+checker-qual, xdg-dbus-proxy and wayland-firewall. Dependency sources/licenses
+are identified by the Maven metadata and Nixpkgs expressions.
+
+home/code/src/main/core/wayland-firewall-hardening.patch modifies wochap/wayland-firewall (MIT).
+home/code/src/main/nixos/xdg-dbus-proxy-visible-calls.patch modifies xdg-dbus-proxy (LGPL-2.1-or-later).
+home/code/src/main/nixos/networkmanager-pidns.patch modifies NetworkManager (GPL-2.0-or-later).
+These modifications follow the respective upstream licenses; EPL-2.0 does not
+relicense upstream code/context. The source URLs/revisions are in the Nix
+expressions and flake.lock. Preserve upstream license notices when distributing
+patched dependency binaries; no dependency source is vendored in this repository.

@@ -1,0 +1,37 @@
+--- a/src/libnm-core-aux-intern/nm-auth-subject.c
++++ b/src/libnm-core-aux-intern/nm-auth-subject.c
+@@ -111,6 +111,19 @@
+
+     case NM_AUTH_SUBJECT_TYPE_UNIX_PROCESS:
+         g_variant_builder_init(&builder, G_VARIANT_TYPE("a{sv}"));
++        /* A system-bus sender is authenticated by the bus, not supplied by
++         * the caller. Let polkit resolve that identity in its own namespace.
++         * Host PIDs cannot be looked up in NetworkManager's private /proc.
++         * Private peer connections have synthetic "x:y:N" senders and must
++         * retain the original unix-process handling. */
++        if (priv->unix_process.dbus_sender
++            && priv->unix_process.dbus_sender[0] == ':') {
++            g_variant_builder_add(&builder,
++                                  "{sv}",
++                                  "name",
++                                  g_variant_new_string(priv->unix_process.dbus_sender));
++            return g_variant_new("(sa{sv})", "system-bus-name", &builder);
++        }
+         g_variant_builder_add(&builder,
+                               "{sv}",
+                               "pid",
+@@ -371,7 +384,14 @@
+             break;
+         }
+
++        /* PID/UID above were obtained from the trusted system bus. Do not
++         * interpret a host PID as a namespace-local PID (including kill(0)).
++         * Authorization uses the authenticated unique bus name above. */
++        if (priv->unix_process.dbus_sender
++            && priv->unix_process.dbus_sender[0] == ':')
++            return;
++
+         priv->unix_process.start_time =
+             nm_utils_get_start_time_for_pid(priv->unix_process.pid, NULL, NULL);
+
+         if (!priv->unix_process.start_time) {
