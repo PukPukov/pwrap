@@ -1,10 +1,10 @@
 { nixcordSource, sources }:
-{ config, lib, pkgs, ... }:
+{ config, options, lib, pkgs, ... }:
 let
   pwrap = import ../.. { inherit pkgs sources; };
   cfg = config.programs.nixcord;
   common = import "${nixcordSource}/modules/lib/mkCommonConfig.nix" {
-    inherit config lib pkgs;
+    inherit config options lib pkgs;
   };
   directories = lib.unique ([ cfg.configDir ] ++ map
     (branch: "${cfg.xdgConfigHome}/${branch}")
@@ -30,12 +30,8 @@ in {
         setupDorionVencordSettings.text = lib.mkForce scripts.setupDorionVencordSettings;
       })
       (lib.mkIf (common.fileSpecs != []) {
-        writeDiscordClientFiles.text = lib.mkForce (confine "nixcord-write-files" ''
-          copy_file() {
-            ${pkgs.coreutils}/bin/install -D -m "$3" "$1" "$2"
-          }
-          ${common.fileCopyCommands}
-        '');
+        writeDiscordClientFiles.text = lib.mkForce (confine "nixcord-write-files"
+          (common.fileCopyCommands "${pkgs.coreutils}/bin/install -D -m 0644"));
       })
     ];
   };

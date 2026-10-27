@@ -79,6 +79,6 @@ in {
         }) hm.users;
     })
     (lib.mkIf (cfg.nixcord.apply && hasNixcord && cfg.nixcord.source != null)
-      ((import ./nixcord.nix { nixcordSource = cfg.nixcord.source; sources = pwrapSources; }) { inherit config lib pkgs; }).config)
+      ((import ./nixcord.nix { nixcordSource = cfg.nixcord.source; sources = pwrapSources; }) { inherit config options lib pkgs; }).config)
   ];
 }
