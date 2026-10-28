@@ -195,9 +195,6 @@ Internal implementation deliberately diverges with main pwrap as main pwrap is n
 ## Disclaimer
 Slop-coded. You can ask me in Discord why I decided to vibecode anything security-related. I dogfood pwrap on my desktop with a fair bunch of world-open services though, try pwning me: 93.90.234.186. Please note that inaccessible IP does not necessarily mean I was pwned, because I usually turn off my PC when I go to sleep.
 
-## Status
-pwrap is not yet publicly available because it still has flaws. I will make it available once I'm convinced it is not a root access generator anymore.
-
 ## TODO
 - Non-root main user support (I'm running everything as root, but I understand there are weirdos who love typing `sudo` 50 times a day for the illusion of security, thus I will remove root hardcode later)
 - Other backends (non-nix, maybe non-wayland)
